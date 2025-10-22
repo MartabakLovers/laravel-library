@@ -22,7 +22,7 @@
     </head>
     <body>
         <div class="container shadow mt-4 p-5">
-            <h1>Hello World</h1>
+            <h1>Update Categories</h1>
             @if (session("success"))
                 <div class="alert alert-success">
                     {{ session("success") }}
@@ -37,41 +37,14 @@
                     </ul>
                 </div>
             @endif
-            <form method="POST">
-            @csrf
-            <input
-            class="form-control"
-            name="category_name"
-            placeholder="Category Name"
-            value="{{ old('category_name') }}"/>
-            <button class="btn btn-primary my-2">
-                Submit
-            </button>
+            <form method="post">
+                @method('PUT')
+                @csrf
+                <input type="text" class="form-control" name="category_name" placeholder="Category Name" value="{{ $data->category_namee }}">
+                <button type="submit" class="btn btn-primary my-3">
+                    Submit
+                </button>
             </form>
-
-            <div class="my-5">
-                <div class="table">
-                    <thead>
-                        <tr>
-                            <th>NO.</th>
-                            <th>Category Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($datas as $data)
-                        <tr>
-                            <td>{{ $loop->index +1 }}</td>
-                            <td>{{ $data->category_name }}</td>
-                            <td>
-                                <a href="category/{{ $data->$id }}">Update</a>
-                                <a href="category/{{ $data->id }}">Delete</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </div>
-            </div>
         </div>
     </body>
 </html>
